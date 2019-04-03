@@ -19,6 +19,14 @@ project(opm-material C CXX)
 
 cmake_minimum_required (VERSION 2.8)
 
+# Custom ERT/ECL -> Using Equinor's libecl (bleeding edge)
+set(EQUINOR_ECL_DIR ${HOME}/git/IOC/libecl)
+set(ecl_DIR "${EQUINOR_ECL_DIR}/cmake-build-debug")
+set(CMAKE_INSTALL_PREFIX "${EQUINOR_ECL_DIR}/cmake-build-debug/lib")
+
+set(USE_MPI OFF)
+message(STATUS "USE_MPI: ${USE_MPI}")
+
 option(SIBLING_SEARCH "Search for other modules in sibling directories?" ON)
 
 if(SIBLING_SEARCH AND NOT opm-common_DIR)
@@ -108,3 +116,6 @@ opm_add_test(test_2dtables)
 opm_add_test(test_components)
 opm_add_test(test_fluidsystems)
 opm_add_test(test_immiscibleflash)
+
+set(USE_MPI OFF)
+message(STATUS "USE_MPI: ${USE_MPI}")
